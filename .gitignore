@@ -3,17 +3,16 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Environments
+# Environment
 .venv/
 venv/
 ENV/
 env/
 .env
 
-# Data & Model Cache (optional large artifacts)
-*.log
-.DS_Store
+# Streamlit config
+.streamlit/
 
-# IDEs
-.vscode/
-.idea/
+# OS specific
+.DS_Store
+Thumbs.db

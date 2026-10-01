@@ -1,0 +1,57 @@
+{
+    "total_students": 1000,
+    "placed_count": 779,
+    "not_placed_count": 221,
+    "placement_rate_pct": 77.9,
+    "feature_statistics": {
+        "cgpa": {
+            "overall_mean": 7.12,
+            "placed_mean": 7.44,
+            "not_placed_mean": 6.01,
+            "min": 4.5,
+            "max": 10.0
+        },
+        "coding_rating": {
+            "overall_mean": 558.41,
+            "placed_mean": 591.19,
+            "not_placed_mean": 442.87,
+            "min": 100.0,
+            "max": 1000.0
+        },
+        "aptitude_score": {
+            "overall_mean": 66.31,
+            "placed_mean": 68.85,
+            "not_placed_mean": 57.39,
+            "min": 30.0,
+            "max": 100.0
+        },
+        "soft_skills_score": {
+            "overall_mean": 3.43,
+            "placed_mean": 3.48,
+            "not_placed_mean": 3.24,
+            "min": 1.0,
+            "max": 5.0
+        },
+        "internships": {
+            "overall_mean": 0.98,
+            "placed_mean": 1.07,
+            "not_placed_mean": 0.67,
+            "min": 0.0,
+            "max": 4.0
+        },
+        "projects_completed": {
+            "overall_mean": 1.93,
+            "placed_mean": 2.02,
+            "not_placed_mean": 1.63,
+            "min": 0.0,
+            "max": 5.0
+        },
+        "backlogs": {
+            "overall_mean": 0.41,
+            "placed_mean": 0.28,
+            "not_placed_mean": 0.87,
+            "min": 0.0,
+            "max": 4.0
+        }
+    }
+}
