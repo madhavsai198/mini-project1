@@ -1,57 +1,102 @@
 {
-    "total_students": 1000,
-    "placed_count": 779,
-    "not_placed_count": 221,
-    "placement_rate_pct": 77.9,
-    "feature_statistics": {
+    "dataset_shape": [
+        1000,
+        13
+    ],
+    "descriptive_stats": {
+        "ssc_percentage": {
+            "mean": 72.6,
+            "std": 9.83,
+            "median": 72.53,
+            "min": 45.0,
+            "max": 98.0,
+            "q25": 65.86,
+            "q75": 79.82
+        },
+        "hsc_percentage": {
+            "mean": 70.56,
+            "std": 10.7,
+            "median": 70.59,
+            "min": 45.0,
+            "max": 98.0,
+            "q25": 63.97,
+            "q75": 77.93
+        },
         "cgpa": {
-            "overall_mean": 7.12,
-            "placed_mean": 7.44,
-            "not_placed_mean": 6.01,
+            "mean": 7.12,
+            "std": 1.05,
+            "median": 7.09,
             "min": 4.5,
-            "max": 10.0
+            "max": 10.0,
+            "q25": 6.39,
+            "q75": 7.86
         },
         "coding_rating": {
-            "overall_mean": 558.41,
-            "placed_mean": 591.19,
-            "not_placed_mean": 442.87,
+            "mean": 558.41,
+            "std": 147.28,
+            "median": 558.0,
             "min": 100.0,
-            "max": 1000.0
+            "max": 1000.0,
+            "q25": 458.0,
+            "q75": 662.0
         },
         "aptitude_score": {
-            "overall_mean": 66.31,
-            "placed_mean": 68.85,
-            "not_placed_mean": 57.39,
+            "mean": 66.31,
+            "std": 15.34,
+            "median": 66.1,
             "min": 30.0,
-            "max": 100.0
+            "max": 100.0,
+            "q25": 55.88,
+            "q75": 77.33
         },
         "soft_skills_score": {
-            "overall_mean": 3.43,
-            "placed_mean": 3.48,
-            "not_placed_mean": 3.24,
+            "mean": 3.43,
+            "std": 0.83,
+            "median": 3.5,
             "min": 1.0,
-            "max": 5.0
+            "max": 5.0,
+            "q25": 2.9,
+            "q75": 4.0
         },
         "internships": {
-            "overall_mean": 0.98,
-            "placed_mean": 1.07,
-            "not_placed_mean": 0.67,
+            "mean": 0.98,
+            "std": 0.96,
+            "median": 1.0,
             "min": 0.0,
-            "max": 4.0
+            "max": 4.0,
+            "q25": 0.0,
+            "q75": 2.0
         },
         "projects_completed": {
-            "overall_mean": 1.93,
-            "placed_mean": 2.02,
-            "not_placed_mean": 1.63,
+            "mean": 1.93,
+            "std": 1.17,
+            "median": 2.0,
             "min": 0.0,
-            "max": 5.0
+            "max": 5.0,
+            "q25": 1.0,
+            "q75": 3.0
+        },
+        "workshops_attended": {
+            "mean": 1.45,
+            "std": 1.07,
+            "median": 1.0,
+            "min": 0.0,
+            "max": 4.0,
+            "q25": 1.0,
+            "q75": 2.0
         },
         "backlogs": {
-            "overall_mean": 0.41,
-            "placed_mean": 0.28,
-            "not_placed_mean": 0.87,
+            "mean": 0.41,
+            "std": 0.78,
+            "median": 0.0,
             "min": 0.0,
-            "max": 4.0
+            "max": 4.0,
+            "q25": 0.0,
+            "q75": 1.0
         }
+    },
+    "placement_split": {
+        "placed": 779,
+        "not_placed": 221
     }
 }

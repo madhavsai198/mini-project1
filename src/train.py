@@ -1,17 +1,16 @@
 import os
 import sys
-import csv
 import json
 import pickle
 import numpy as np
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from preprocessing import run_preprocessing_pipeline, FEATURE_NAMES
-from evaluate import calculate_evaluation_metrics
+# Preprocessing imports
+from preprocessing import run_feature_preparation_pipeline, NUMERICAL_FEATURES
 
 
 class LogisticRegressionClassifier:
-    def __init__(self, lr=0.05, epochs=1000):
+    def __init__(self, lr=0.08, epochs=1200):
         self.lr = lr
         self.epochs = epochs
         self.weights = None
@@ -59,7 +58,7 @@ class DecisionNode:
 
 
 class DecisionTreeClassifier:
-    def __init__(self, max_depth=5, min_samples_split=4):
+    def __init__(self, max_depth=6, min_samples_split=4):
         self.max_depth = max_depth
         self.min_samples_split = min_samples_split
         self.root = None
@@ -146,7 +145,7 @@ class DecisionTreeClassifier:
 
 
 class RandomForestClassifier:
-    def __init__(self, n_trees=15, max_depth=5, min_samples_split=4):
+    def __init__(self, n_trees=20, max_depth=6, min_samples_split=4):
         self.n_trees = n_trees
         self.max_depth = max_depth
         self.min_samples_split = min_samples_split
@@ -169,20 +168,65 @@ class RandomForestClassifier:
         return (self.predict_proba(X) >= threshold).astype(int)
 
 
-def train_and_compare_models():
-    print("[*] Preprocessing raw dataset...")
-    X, y, scaler = run_preprocessing_pipeline()
+def calculate_evaluation_metrics(y_true, y_pred, y_proba):
+    tp = int(np.sum((y_true == 1) & (y_pred == 1)))
+    tn = int(np.sum((y_true == 0) & (y_pred == 0)))
+    fp = int(np.sum((y_true == 0) & (y_pred == 1)))
+    fn = int(np.sum((y_true == 1) & (y_pred == 0)))
 
-    # Train / Test split (80/20)
-    np.random.seed(42)
-    indices = np.arange(len(X))
-    np.random.shuffle(indices)
+    total = len(y_true)
+    accuracy = float((tp + tn) / total) if total > 0 else 0.0
+    precision = float(tp / (tp + fp)) if (tp + fp) > 0 else 0.0
+    recall = float(tp / (tp + fn)) if (tp + fn) > 0 else 0.0
+    f1 = float(2 * precision * recall / (precision + recall)) if (precision + recall) > 0 else 0.0
 
-    split_idx = int(0.80 * len(X))
-    train_idx, test_idx = indices[:split_idx], indices[split_idx:]
+    sorted_indices = np.argsort(y_proba)[::-1]
+    y_true_sorted = y_true[sorted_indices]
+    
+    n_pos = np.sum(y_true == 1)
+    n_neg = np.sum(y_true == 0)
+    
+    tpr_list = [0.0]
+    fpr_list = [0.0]
+    accum_tp = 0
+    accum_fp = 0
+    for label in y_true_sorted:
+        if label == 1:
+            accum_tp += 1
+        else:
+            accum_fp += 1
+        tpr_list.append(accum_tp / n_pos)
+        fpr_list.append(accum_fp / n_neg)
+        
+    roc_auc = 0.0
+    for i in range(1, len(fpr_list)):
+        roc_auc += (fpr_list[i] - fpr_list[i-1]) * (tpr_list[i] + tpr_list[i-1]) / 2.0
+    roc_auc = float(roc_auc)
 
-    X_train, y_train = X[train_idx], y[train_idx]
-    X_test, y_test = X[test_idx], y[test_idx]
+    return {
+        "accuracy": round(accuracy, 4),
+        "precision": round(precision, 4),
+        "recall": round(recall, 4),
+        "f1_score": round(f1, 4),
+        "roc_auc": round(roc_auc, 4),
+        "confusion_matrix": {"tn": tn, "fp": fp, "fn": fn, "tp": tp}
+    }
+
+
+def run_training_pipeline():
+    print("[*] Executing Preprocessing Pipeline...")
+    X_train, X_test, y_train, y_test, scaler = run_feature_preparation_pipeline()
+
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    models_dir = os.path.join(base_dir, 'models')
+    os.makedirs(models_dir, exist_ok=True)
+
+    print("\n" + "=" * 70)
+    print("[STEP 1] MODEL INITIALIZATION & TRAINING")
+    print("=" * 70)
+    print(f"[*] Training Dataset Size: {X_train.shape[0]} samples, {X_train.shape[1]} features")
+    print(f"[*] Testing Dataset Size:  {X_test.shape[0]} samples, {X_test.shape[1]} features")
+    print(f"[*] Reproducible Random State: 42")
 
     models = {
         "logistic_regression": LogisticRegressionClassifier(lr=0.08, epochs=1200),
@@ -191,61 +235,58 @@ def train_and_compare_models():
     }
 
     evaluations = {}
-    best_score = -1.0
-    best_model_name = None
-    best_model_obj = None
-
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    models_dir = os.path.join(base_dir, 'models')
-
-    print("\n[*] Training & Evaluating Models on Test Set:")
-    print("=" * 60)
 
     for name, model in models.items():
+        print(f"\n[+] Fitting Model: {name.upper()}")
+        
+        # Fit ONLY on X_train, y_train
         model.fit(X_train, y_train)
-        y_proba = model.predict_proba(X_test)
-        y_pred = model.predict(X_test)
+        
+        # Predict ONLY on X_test
+        y_proba_test = model.predict_proba(X_test)
+        y_pred_test = model.predict(X_test)
 
-        metrics = calculate_evaluation_metrics(y_test, y_pred, y_proba)
+        # Evaluate on X_test
+        metrics = calculate_evaluation_metrics(y_test, y_pred_test, y_proba_test)
         evaluations[name] = metrics
 
-        print(f"Model: {name.upper()}")
-        print(f"  - Accuracy:  {metrics['accuracy'] * 100:.2f}%")
-        print(f"  - F1-Score:  {metrics['f1_score']:.4f}")
-        print(f"  - ROC-AUC:   {metrics['roc_auc']:.4f}")
-        print(f"  - Precision: {metrics['precision']:.4f}")
-        print(f"  - Recall:    {metrics['recall']:.4f}")
-        print("-" * 60)
-
         # Save individual model pickle artifact
-        model_pkl_path = os.path.join(models_dir, f"{name}.pkl")
-        with open(model_pkl_path, 'wb') as f:
+        model_filename = f"{name}.pkl"
+        model_path = os.path.join(models_dir, model_filename)
+        with open(model_path, 'wb') as f:
             pickle.dump(model, f)
 
-        # Objective criteria for best model selection: highest F1-score
-        if metrics['f1_score'] > best_score:
-            best_score = metrics['f1_score']
-            best_model_name = name
-            best_model_obj = model
+        print(f"    - Saved artifact to: models/{model_filename}")
+        print(f"    - Test Accuracy:  {metrics['accuracy'] * 100:.2f}%")
+        print(f"    - Test F1-Score:  {metrics['f1_score']:.4f}")
+        print(f"    - Test ROC-AUC:   {metrics['roc_auc']:.4f}")
 
-    print(f"[BEST MODEL] BEST MODEL SELECTED DYNAMICALLY: {best_model_name.upper()} (F1: {best_score:.4f})")
-
-    # Save best model artifact
-    best_model_path = os.path.join(models_dir, 'best_model.pkl')
-    with open(best_model_path, 'wb') as f:
-        pickle.dump(best_model_obj, f)
-
-    # Save summary evaluation json
-    eval_json_path = os.path.join(models_dir, 'evaluation_results.json')
-    with open(eval_json_path, 'w') as f:
+    # Save evaluation summary
+    eval_path = os.path.join(models_dir, 'evaluation_results.json')
+    best_name = max(evaluations, key=lambda k: evaluations[k]['f1_score'])
+    
+    with open(eval_path, 'w') as f:
         json.dump({
-            "best_model": best_model_name,
+            "best_model": best_name,
             "models": evaluations
         }, f, indent=4)
 
-    print(f"[+] Evaluation results saved to: {eval_json_path}")
-    return evaluations, best_model_name
+    # Save best model copy
+    best_model_obj = models[best_name]
+    with open(os.path.join(models_dir, 'best_model.pkl'), 'wb') as f:
+        pickle.dump(best_model_obj, f)
+
+    print("\n" + "=" * 70)
+    print("[SUMMARY] TRAINING SUMMARY & MODEL ARTIFACT CHECK")
+    print("=" * 70)
+    print(f"  - Saved models/logistic_regression.pkl: YES")
+    print(f"  - Saved models/decision_tree.pkl:       YES")
+    print(f"  - Saved models/random_forest.pkl:       YES")
+    print(f"  - Saved models/best_model.pkl:          YES ({best_name.upper()})")
+    print("=" * 70)
+
+    return evaluations
 
 
 if __name__ == '__main__':
-    train_and_compare_models()
+    run_training_pipeline()

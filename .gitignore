@@ -10,7 +10,8 @@ ENV/
 env/
 .env
 
-# Streamlit config
+# Jupyter & Streamlit
+.ipynb_checkpoints/
 .streamlit/
 
 # OS specific
