@@ -7,8 +7,7 @@ import numpy as np
 # Ensure src directory is in Python path
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src'))
 
-from preprocessing import load_raw_csv
-from predict import predict_placement_probability
+from predict import predict_placement_outcome
 from recommendations import generate_profile_recommendations
 from eda import compute_eda_summary
 
@@ -117,23 +116,23 @@ def main():
         st.markdown("---")
         if st.button("🚀 Predict Placement Outcome", type="primary", use_container_width=True):
             try:
-                res = predict_placement_probability(student_payload)
+                res = predict_placement_outcome(student_payload)
                 
                 res_col1, res_col2 = st.columns(2)
                 
                 with res_col1:
-                    if res['prediction'] == "Placed":
-                        st.success(f"### Predicted Outcome: **{res['prediction']}** 🟢")
+                    if res['predicted_class'] == "Placed":
+                        st.success(f"### Predicted Outcome: **{res['predicted_class']}** 🟢")
                     else:
-                        st.error(f"### Predicted Outcome: **{res['prediction']}** 🔴")
+                        st.error(f"### Predicted Outcome: **{res['predicted_class']}** 🔴")
                 
                 with res_col2:
                     st.metric(
                         label="Model Estimated Placement Probability",
-                        value=f"{res['estimated_probability_pct']}%"
+                        value=f"{res['placement_probability_pct']}%"
                     )
 
-                st.progress(res['estimated_probability_pct'] / 100.0)
+                st.progress(res['placement_probability_pct'] / 100.0)
 
                 # Mandatory Disclaimer Notice
                 st.markdown(

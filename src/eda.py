@@ -64,6 +64,42 @@ def compute_descriptive_stats(data, col_idx):
     return stats
 
 
+def compute_eda_summary(raw_csv_path):
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    cleaned_path = os.path.join(base_dir, 'data', 'processed', 'cleaned_data.csv')
+    if not os.path.exists(cleaned_path):
+        cleaned_path = raw_csv_path
+        
+    headers, data, col_idx = load_cleaned_dataset(cleaned_path)
+    
+    total_students = len(data)
+    placed_count = sum(1 for r in data if int(r[col_idx['placement_status']]) == 1 or r[col_idx['placement_status']] == 'Placed')
+    not_placed_count = total_students - placed_count
+    placement_rate = round((placed_count / total_students) * 100, 2) if total_students > 0 else 0.0
+
+    stats = {}
+    for feat in NUMERICAL_FEATURES:
+        placed_vals = [float(r[col_idx[feat]]) for r in data if int(r[col_idx['placement_status']]) == 1 or r[col_idx['placement_status']] == 'Placed']
+        not_placed_vals = [float(r[col_idx[feat]]) for r in data if int(r[col_idx['placement_status']]) == 0 or r[col_idx['placement_status']] == 'Not Placed']
+        all_vals = placed_vals + not_placed_vals
+        
+        stats[feat] = {
+            "overall_mean": round(float(np.mean(all_vals)), 2) if all_vals else 0.0,
+            "placed_mean": round(float(np.mean(placed_vals)), 2) if placed_vals else 0.0,
+            "not_placed_mean": round(float(np.mean(not_placed_vals)), 2) if not_placed_vals else 0.0,
+            "min": round(float(np.min(all_vals)), 2) if all_vals else 0.0,
+            "max": round(float(np.max(all_vals)), 2) if all_vals else 0.0
+        }
+
+    return {
+        "total_students": total_students,
+        "placed_count": placed_count,
+        "not_placed_count": not_placed_count,
+        "placement_rate_pct": placement_rate,
+        "feature_statistics": stats
+    }
+
+
 def compute_correlation_matrix(data, col_idx):
     feats = NUMERICAL_FEATURES + ['placement_status']
     matrix = []
