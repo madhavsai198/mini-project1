@@ -1,0 +1,35 @@
+{
+    "model_name": "CardioCare Logistic Regression Classifier",
+    "random_forest": {
+        "accuracy": 0.9583,
+        "precision": 0.9607,
+        "recall": 0.9828,
+        "f1_score": 0.9716,
+        "roc_auc": 0.9943,
+        "confusion_matrix": [
+            [
+                59,
+                7
+            ],
+            [
+                3,
+                171
+            ]
+        ]
+    },
+    "feature_importances": {
+        "age": 0.1314,
+        "sex": 0.0365,
+        "cp": 0.17,
+        "trestbps": 0.0713,
+        "chol": 0.0484,
+        "fbs": 0.0006,
+        "restecg": 0.0019,
+        "thalach": 0.1067,
+        "exang": 0.0855,
+        "oldpeak": 0.1454,
+        "slope": 0.009,
+        "ca": 0.1219,
+        "thal": 0.0713
+    }
+}

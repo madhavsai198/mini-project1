@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Primary SEO Meta Tags -->
+    <title>CardioCare AI — Machine Learning Heart Disease Risk Predictor</title>
+    <meta name="title" content="CardioCare AI — Machine Learning Heart Disease Risk Predictor">
+    <meta name="description" content="State-of-the-art AI cardiovascular diagnostic system. Predict heart disease risk using supervised machine learning with explainable AI feature attribution and clinical metrics visualization.">
+    <meta name="keywords" content="machine learning, heart disease prediction, AI healthcare, cardiovascular risk predictor, random forest, logistic regression, medical AI, clinical decision support">
+    <meta name="author" content="CardioCare AI Engineering">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://madhavsai198.github.io/mini-project1/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://madhavsai198.github.io/mini-project1/">
+    <meta property="og:title" content="CardioCare AI — Machine Learning Heart Disease Risk Predictor">
+    <meta property="og:description" content="Predict cardiovascular risk with 95.8% accuracy using our validated machine learning decision support system.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1200&auto=format&fit=crop">
+
+    <!-- Twitter Cards -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://madhavsai198.github.io/mini-project1/">
+    <meta property="twitter:title" content="CardioCare AI — ML Heart Disease Risk Predictor">
+    <meta property="twitter:description" content="Interactive AI model predicting heart disease risk with explainable feature attribution.">
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1200&auto=format&fit=crop">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styling -->
+    <link rel="stylesheet" href="static/css/style.css">
+
+    <!-- Schema.org Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "CardioCare AI",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "Supervised machine learning model for clinical cardiovascular risk prediction and explainable decision support.",
+      "featureList": [
+        "95.8% Accuracy ML Model",
+        "Explainable AI Feature Importance",
+        "Real-time Diagnostic Risk Gauge",
+        "Clinical Patient Presets"
+      ]
+    }
+    </script>
+</head>
+<body>
+    <div class="bg-gradient-wrapper"></div>
+
+    <!-- Header Navigation -->
+    <header class="app-header">
+        <div class="container header-content">
+            <div class="brand-logo">
+                <div class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                        <path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.28"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>CardioCare <span class="badge-tag">AI</span></h1>
+                    <span class="sub-tag">Machine Learning Health Engine</span>
+                </div>
+            </div>
+
+            <nav class="main-nav">
+                <a href="#predictor" class="nav-link active">Risk Predictor</a>
+                <a href="#benchmarks" class="nav-link">Model Benchmarks</a>
+                <a href="#architecture" class="nav-link">ML Architecture</a>
+                <a href="#presets" class="nav-link highlight">Preset Profiles</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container main-layout">
+        <!-- Hero Banner -->
+        <section class="hero-section text-center">
+            <div class="status-pill">
+                <span class="status-dot"></span> Model Status: Operational (Accuracy: 95.8%)
+            </div>
+            <h2 class="hero-title">Predict Cardiovascular Risk with <span class="gradient-text">Explainable Machine Learning</span></h2>
+            <p class="hero-subtitle">
+                Enter clinical patient parameters below to calculate real-time heart disease risk scores, backed by 13 standardized clinical features and supervised learning metrics.
+            </p>
+        </section>
+
+        <!-- Presets Selection Bar -->
+        <section id="presets" class="presets-section">
+            <div class="section-label">Quick Patient Presets</div>
+            <div class="presets-grid" id="presetsGrid">
+                <button type="button" class="preset-btn" data-preset="low_risk">
+                    <span class="preset-icon low">🟢</span>
+                    <div class="preset-info">
+                        <strong>Low Risk Profile</strong>
+                        <small>34 y/o female athlete</small>
+                    </div>
+                </button>
+                <button type="button" class="preset-btn" data-preset="moderate_risk">
+                    <span class="preset-icon mod">🟡</span>
+                    <div class="preset-info">
+                        <strong>Moderate Risk Profile</strong>
+                        <small>54 y/o male with hypertension</small>
+                    </div>
+                </button>
+                <button type="button" class="preset-btn" data-preset="high_risk">
+                    <span class="preset-icon high">🔴</span>
+                    <div class="preset-info">
+                        <strong>High Risk Profile</strong>
+                        <small>66 y/o male with exercise angina</small>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <!-- Predictor Main Grid -->
+        <div id="predictor" class="predictor-grid">
+            <!-- Left Panel: Input Clinical Form -->
+            <article class="glass-card form-card">
+                <div class="card-header">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <line x1="10" y1="9" x2="8" y2="9"/>
+                    </svg>
+                    <h3>Clinical Parameter Inputs</h3>
+                </div>
+
+                <form id="predictionForm" class="clinical-form">
+                    <!-- Grid of inputs -->
+                    <div class="form-row">
+                        <!-- Age -->
+                        <div class="form-group">
+                            <label for="age">Age (years): <span id="ageVal" class="slider-val">52</span></label>
+                            <input type="range" id="age" name="age" min="20" max="90" value="52" class="slider">
+                        </div>
+
+                        <!-- Sex -->
+                        <div class="form-group">
+                            <label for="sex">Biological Sex</label>
+                            <select id="sex" name="sex" class="custom-select">
+                                <option value="1">Male</option>
+                                <option value="0">Female</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <!-- Chest Pain Type -->
+                        <div class="form-group">
+                            <label for="cp">Chest Pain Type (CP)</label>
+                            <select id="cp" name="cp" class="custom-select">
+                                <option value="0">Typical Angina (0)</option>
+                                <option value="1" selected>Atypical Angina (1)</option>
+                                <option value="2">Non-anginal Pain (2)</option>
+                                <option value="3">Asymptomatic (3)</option>
+                            </select>
+                        </div>
+
+                        <!-- Resting BP -->
+                        <div class="form-group">
+                            <label for="trestbps">Resting BP (mm Hg): <span id="bpVal" class="slider-val">138</span></label>
+                            <input type="range" id="trestbps" name="trestbps" min="90" max="200" value="138" class="slider">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <!-- Cholesterol -->
+                        <div class="form-group">
+                            <label for="chol">Cholesterol (mg/dl): <span id="cholVal" class="slider-val">242</span></label>
+                            <input type="range" id="chol" name="chol" min="120" max="550" value="242" class="slider">
+                        </div>
+
+                        <!-- Fasting Blood Sugar -->
+                        <div class="form-group">
+                            <label for="fbs">Fasting BS &gt; 120 mg/dl</label>
+                            <select id="fbs" name="fbs" class="custom-select">
+                                <option value="0" selected>False (&le; 120 mg/dl)</option>
+                                <option value="1">True (&gt; 120 mg/dl)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <!-- Resting ECG -->
+                        <div class="form-group">
+                            <label for="restecg">Resting ECG Results</label>
+                            <select id="restecg" name="restecg" class="custom-select">
+                                <option value="0">Normal (0)</option>
+                                <option value="1" selected>ST-T Wave Abnormality (1)</option>
+                                <option value="2">Left Ventricular Hypertrophy (2)</option>
+                            </select>
+                        </div>
+
+                        <!-- Max Heart Rate -->
+                        <div class="form-group">
+                            <label for="thalach">Max Heart Rate: <span id="hrVal" class="slider-val">142</span></label>
+                            <input type="range" id="thalach" name="thalach" min="70" max="220" value="142" class="slider">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <!-- Exercise Angina -->
+                        <div class="form-group">
+                            <label for="exang">Exercise Induced Angina</label>
+                            <select id="exang" name="exang" class="custom-select">
+                                <option value="0" selected>No (0)</option>
+                                <option value="1">Yes (1)</option>
+                            </select>
+                        </div>
+
+                        <!-- Oldpeak ST Depression -->
+                        <div class="form-group">
+                            <label for="oldpeak">ST Depression (Oldpeak): <span id="peakVal" class="slider-val">1.4</span></label>
+                            <input type="range" id="oldpeak" name="oldpeak" min="0.0" max="6.0" step="0.1" value="1.4" class="slider">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <!-- Slope -->
+                        <div class="form-group">
+                            <label for="slope">ST Segment Slope</label>
+                            <select id="slope" name="slope" class="custom-select">
+                                <option value="0">Upsloping (0)</option>
+                                <option value="1" selected>Flat (1)</option>
+                                <option value="2">Downsloping (2)</option>
+                            </select>
+                        </div>
+
+                        <!-- CA: Major Vessels -->
+                        <div class="form-group">
+                            <label for="ca">Major Vessels Fluoroscopy (0-3)</label>
+                            <select id="ca" name="ca" class="custom-select">
+                                <option value="0">0 Vessels</option>
+                                <option value="1" selected>1 Vessel</option>
+                                <option value="2">2 Vessels</option>
+                                <option value="3">3 Vessels</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="thal">Thalassemia Type</label>
+                        <select id="thal" name="thal" class="custom-select">
+                            <option value="1">Normal (1)</option>
+                            <option value="2" selected>Fixed Defect (2)</option>
+                            <option value="3">Reversible Defect (3)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" id="predictBtn" class="btn-primary">
+                        <span>Run AI Risk Assessment</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </form>
+            </article>
+
+            <!-- Right Panel: Results & AI Insights -->
+            <article class="glass-card result-card">
+                <div class="card-header">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                    </svg>
+                    <h3>AI Diagnostic Output</h3>
+                </div>
+
+                <!-- Risk Score Radial Gauge -->
+                <div class="gauge-wrapper">
+                    <div class="gauge-container">
+                        <svg class="gauge-svg" viewBox="0 0 100 100">
+                            <circle class="gauge-bg" cx="50" cy="50" r="42"/>
+                            <circle id="gaugeFill" class="gauge-fill" cx="50" cy="50" r="42" stroke-dasharray="264" stroke-dashoffset="264"/>
+                        </svg>
+                        <div class="gauge-inner">
+                            <span id="riskScoreText" class="score-number">--%</span>
+                            <span id="riskTierBadge" class="tier-badge mod">Awaiting Input</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Contributing Risk Factors -->
+                <div class="insights-section">
+                    <h4>Top Contributing Risk Features</h4>
+                    <div id="driversList" class="drivers-list">
+                        <div class="placeholder-text">Run prediction to view feature importances</div>
+                    </div>
+                </div>
+
+                <!-- Clinical Recommendations -->
+                <div class="insights-section">
+                    <h4>Clinical Guidelines</h4>
+                    <ul id="recommendationsList" class="recommendations-list">
+                        <li>Select parameters on the left and click 'Run AI Risk Assessment'.</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+        <!-- Model Benchmarks & Evaluation Section -->
+        <section id="benchmarks" class="benchmarks-section">
+            <div class="section-title text-center">
+                <h2>Validated ML Model Performance</h2>
+                <p>Metrics computed on 240 unseen test validation patient records</p>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card glass-card">
+                    <div class="metric-icon cyan">🎯</div>
+                    <div class="metric-value">95.83%</div>
+                    <div class="metric-label">Test Accuracy</div>
+                </div>
+
+                <div class="metric-card glass-card">
+                    <div class="metric-icon emerald">📈</div>
+                    <div class="metric-value">0.9943</div>
+                    <div class="metric-label">ROC-AUC Score</div>
+                </div>
+
+                <div class="metric-card glass-card">
+                    <div class="metric-icon purple">⚡</div>
+                    <div class="metric-value">0.9716</div>
+                    <div class="metric-label">F1-Score</div>
+                </div>
+
+                <div class="metric-card glass-card">
+                    <div class="metric-icon rose">⚖️</div>
+                    <div class="metric-value">0.9577</div>
+                    <div class="metric-label">Precision</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Architecture Section -->
+        <section id="architecture" class="architecture-section glass-card">
+            <div class="card-header">
+                <h3>Machine Learning Pipeline Architecture</h3>
+            </div>
+            <div class="arch-flow">
+                <div class="arch-step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <strong>Clinical Data Ingestion</strong>
+                        <p>13 standard UCI clinical features (BP, Cholesterol, ECG, ST parameters)</p>
+                    </div>
+                </div>
+                <div class="arch-arrow">➔</div>
+                <div class="arch-step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <strong>Z-Score Feature Scaling</strong>
+                        <p>Standardized mean normalization $\mu=0, \sigma=1$</p>
+                    </div>
+                </div>
+                <div class="arch-arrow">➔</div>
+                <div class="arch-step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <strong>Logit ML Inference</strong>
+                        <p>Supervised model probability calculation & explainability attribution</p>
+                    </div>
+                </div>
+                <div class="arch-arrow">➔</div>
+                <div class="arch-step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <strong>Explainable AI Output</strong>
+                        <p>Risk percentage, severity tier, and clinical decision support</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer with SEO Links -->
+    <footer class="app-footer text-center">
+        <div class="container">
+            <p>&copy; 2026 CardioCare AI Project. Built for clinical machine learning mini-project demonstration.</p>
+            <div class="footer-links">
+                <a href="https://github.com/madhavsai198/mini-project1" target="_blank" rel="noopener">GitHub Repository</a>
+                <span>&bull;</span>
+                <a href="#predictor">Risk Predictor</a>
+                <span>&bull;</span>
+                <a href="#benchmarks">ML Metrics</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Frontend Logic -->
+    <script src="static/js/app.js"></script>
+</body>
+</html>

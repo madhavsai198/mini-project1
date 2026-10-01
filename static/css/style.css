@@ -1,0 +1,622 @@
+/* CardioCare AI Design System & Styling */
+:root {
+    --bg-dark: #090d16;
+    --bg-card: rgba(18, 25, 41, 0.75);
+    --border-card: rgba(255, 255, 255, 0.08);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-cyan: #06b6d4;
+    --accent-purple: #8b5cf6;
+    --accent-emerald: #10b981;
+    --accent-amber: #f59e0b;
+    --accent-rose: #f43f5e;
+    --radius-lg: 18px;
+    --radius-md: 12px;
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Background Gradients */
+.bg-gradient-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: 
+        radial-gradient(circle at 15% 15%, rgba(6, 182, 212, 0.12), transparent 40%),
+        radial-gradient(circle at 85% 75%, rgba(139, 92, 246, 0.12), transparent 40%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Header Navigation */
+.app-header {
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-card);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(6, 182, 212, 0.3);
+}
+
+.logo-text h1 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge-tag {
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+.sub-tag {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    display: block;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--accent-cyan);
+}
+
+.nav-link.highlight {
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    padding: 6px 14px;
+    border-radius: 20px;
+    color: var(--accent-cyan);
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 40px 0 24px 0;
+}
+
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    color: var(--accent-emerald);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-emerald);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent-emerald);
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    color: var(--text-secondary);
+    max-width: 680px;
+    margin: 0 auto;
+    font-size: 1.05rem;
+}
+
+.text-center { text-align: center; }
+
+/* Presets Bar */
+.presets-section {
+    margin: 24px 0;
+}
+
+.section-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.presets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.preset-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.25s ease;
+    color: var(--text-primary);
+}
+
+.preset-btn:hover {
+    border-color: var(--accent-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(6, 182, 212, 0.15);
+}
+
+.preset-icon {
+    font-size: 1.4rem;
+}
+
+.preset-info strong {
+    display: block;
+    font-size: 0.95rem;
+}
+
+.preset-info small {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+/* Cards Layout */
+.predictor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-bottom: 48px;
+}
+
+.glass-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    backdrop-filter: blur(20px);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-card);
+    color: var(--accent-cyan);
+}
+
+.card-header h3 {
+    font-family: var(--font-heading);
+    color: var(--text-primary);
+    font-size: 1.2rem;
+}
+
+/* Clinical Form Inputs */
+.clinical-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    display: flex;
+    justify-content: space-between;
+}
+
+.slider-val {
+    color: var(--accent-cyan);
+    font-weight: 700;
+}
+
+.slider {
+    width: 100%;
+    accent-color: var(--accent-cyan);
+    background: #1e293b;
+    height: 6px;
+    border-radius: 4px;
+    outline: none;
+}
+
+.custom-select {
+    background: #1e293b;
+    border: 1px solid var(--border-card);
+    color: var(--text-primary);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.custom-select:focus {
+    border-color: var(--accent-cyan);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+    border: none;
+    color: #fff;
+    padding: 14px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.25s ease;
+    margin-top: 10px;
+    box-shadow: 0 4px 18px rgba(6, 182, 212, 0.25);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(6, 182, 212, 0.4);
+}
+
+/* Results & Gauge Visual */
+.gauge-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0 28px 0;
+}
+
+.gauge-container {
+    position: relative;
+    width: 180px;
+    height: 180px;
+}
+
+.gauge-svg {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
+
+.gauge-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.05);
+    stroke-width: 10;
+}
+
+.gauge-fill {
+    fill: none;
+    stroke: var(--accent-cyan);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease, stroke 0.4s ease;
+}
+
+.gauge-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.score-number {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 800;
+}
+
+.tier-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.tier-badge.low {
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--accent-emerald);
+    border: 1px solid var(--accent-emerald);
+}
+
+.tier-badge.mod {
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--accent-amber);
+    border: 1px solid var(--accent-amber);
+}
+
+.tier-badge.high {
+    background: rgba(244, 63, 94, 0.2);
+    color: var(--accent-rose);
+    border: 1px solid var(--accent-rose);
+}
+
+.insights-section {
+    margin-bottom: 24px;
+}
+
+.insights-section h4 {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.drivers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.driver-item {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 10px 14px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.88rem;
+}
+
+.driver-bar {
+    height: 6px;
+    background: var(--accent-cyan);
+    border-radius: 3px;
+    margin-top: 4px;
+}
+
+.recommendations-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.recommendations-list li {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 20px;
+}
+
+.recommendations-list li::before {
+    content: "•";
+    color: var(--accent-cyan);
+    position: absolute;
+    left: 4px;
+    font-size: 1.2rem;
+}
+
+/* Benchmarks Section */
+.benchmarks-section {
+    margin-bottom: 48px;
+}
+
+.section-title h2 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+}
+
+.section-title p {
+    color: var(--text-secondary);
+    margin-bottom: 28px;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.metric-card {
+    text-align: center;
+    padding: 24px 16px;
+}
+
+.metric-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.metric-value {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.metric-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+/* Architecture Flow */
+.architecture-section {
+    margin-bottom: 48px;
+}
+
+.arch-flow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.arch-step {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-card);
+    padding: 16px;
+    border-radius: var(--radius-md);
+    display: flex;
+    gap: 12px;
+}
+
+.step-num {
+    width: 28px;
+    height: 28px;
+    background: rgba(6, 182, 212, 0.15);
+    color: var(--accent-cyan);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.step-content strong {
+    font-size: 0.9rem;
+    display: block;
+}
+
+.step-content p {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+.arch-arrow {
+    color: var(--accent-cyan);
+    font-size: 1.2rem;
+}
+
+/* Footer */
+.app-footer {
+    border-top: 1px solid var(--border-card);
+    padding: 32px 0;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.footer-links a {
+    color: var(--accent-cyan);
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 900px) {
+    .predictor-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .arch-flow {
+        flex-direction: column;
+    }
+
+    .arch-arrow {
+        transform: rotate(90deg);
+    }
+}
